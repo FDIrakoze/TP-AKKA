@@ -47,9 +47,11 @@ public class Cooker extends AbstractActor {
 		return receiveBuilder().match(WhoToTell.class, wtg -> {
 			if (!wtg.ready) {
 					System.out.println(">The cooker " + this.name + " received the command " + wtg.who);
+					System.out.println("The number of cooker available is now: " + wtg.free_cookers.size());
 					TimeUnit.SECONDS.sleep(30);
 					System.out.println(">>The cooker " + this.name + " has finished to prepare the command");
 					wtg.free_cookers.add(getSelf());
+					System.out.println("The number of cooker available is now: " + wtg.free_cookers.size());
 					wtg.ready = true;
 					wtg.chef.tell(new Cooker.WhoToTell(wtg.who, wtg.free_cookers, wtg.ready, wtg.chef, wtg.commands),
 							ActorRef.noSender());
