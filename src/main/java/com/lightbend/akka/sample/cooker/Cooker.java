@@ -46,15 +46,15 @@ public class Cooker extends AbstractActor {
 	public Receive createReceive() {
 		return receiveBuilder().match(WhoToTell.class, wtg -> {
 			if (!wtg.ready) {
-					System.out.println("the cooker " + this.name + " received the command " + wtg.who);
+					System.out.println(">The cooker " + this.name + " received the command " + wtg.who);
 					TimeUnit.SECONDS.sleep(30);
-					System.out.println("the cooker " + this.name + " has finished to prepare the command");
+					System.out.println(">>The cooker " + this.name + " has finished to prepare the command");
 					wtg.free_cookers.add(getSelf());
 					wtg.ready = true;
 					wtg.chef.tell(new Cooker.WhoToTell(wtg.who, wtg.free_cookers, wtg.ready, wtg.chef, wtg.commands),
 							ActorRef.noSender());
 			} else {
-				System.out.println("The Chef cooker " + this.name + " has received the command " + wtg.who
+				System.out.println("**The Chief cooker " + this.name + " has received the command " + wtg.who
 						+ " It can be served to the client");
 				if (wtg.commands.size() != 0) {
 					String command = wtg.commands.remove(0);
@@ -69,14 +69,14 @@ public class Cooker extends AbstractActor {
 		}).match(ToTell.class, wtg -> {
 			if (wtg.free_cookers.size() != 0) {
 				System.out.println(
-						"the Chef cooker " + this.name + " has received the command " + wtg.who + " from the client");
+						"*The Chief cooker " + this.name + " has received the command " + wtg.who + " from the client");
 				ActorRef cooker = wtg.free_cookers.get(0);
 				wtg.free_cookers.remove(0);
 				cooker.tell(new Cooker.WhoToTell(wtg.who, wtg.free_cookers, false, wtg.chef, wtg.commands),
 						ActorRef.noSender());
 			} else {
 				wtg.commands.add(wtg.who);
-				System.out.println("The Chef cooker " + this.name + " has received the command " + wtg.who
+				System.out.println("!! The Chief cooker " + this.name + " has received the command " + wtg.who
 						+ " But no cooker available");
 			}
 		}).match(Tell.class, x -> {

@@ -38,11 +38,11 @@ public class Main {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
 			
-			  while (!br.readLine().equals("QUIT")) {
-				  System.out.println("Veuillez saisir Plat à transmettre au Chef: ");
+			  do{
+				  System.out.println("Please type the command to give to the Chief");
 				  message = br.readLine();
 				  command(message);
-			  }
+			  }while (!br.readLine().equals("QUIT"));
 			 
 
 		} catch (IOException e) {
