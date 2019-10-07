@@ -29,6 +29,7 @@ public class Main {
 	 * The main method use to launch the app
 	 * 
 	 * @param args
+	 * 			main arguments (here there is no need)
 	 */
 	public static void main(String[] args) {
 
@@ -63,6 +64,7 @@ public class Main {
 	 * Create a Cooker actor
 	 * 
 	 * @param name
+	 * 			Name of the actor
 	 * @return an Actor
 	 */
 	private static ActorRef createActor(String name) {
@@ -75,6 +77,7 @@ public class Main {
 	 * Method enabling the Chef to send command to cooker
 	 * 
 	 * @param message
+	 * 		command to send in the kitchen 
 	 */
 	private static void command(String message) {
 		chef.tell(new Cooker.ToTell(message, free_cookers,false, chef,commands), ActorRef.noSender());

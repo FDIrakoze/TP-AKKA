@@ -10,7 +10,8 @@ import akka.actor.ActorRef;
 import akka.actor.Props;
 
 /**
- * @author Franco Davy Irakoze & Jérémy Vienne
+ * @author Franco Davy Irakoze
+ * @author Jeremy Vienne
  *
  */
 public class Cooker extends AbstractActor {
@@ -23,7 +24,9 @@ public class Cooker extends AbstractActor {
 	 * Cooker constructor
 	 * 
 	 * @param name
+	 * 			Name of the cooker actor
 	 * @param printer
+	 * 			Actor in charge of printing
 	 */
 	public Cooker(String name, ActorRef printer) {
 		this.name = name;
@@ -35,7 +38,9 @@ public class Cooker extends AbstractActor {
 	 * Initialize the properties of the cooker
 	 * 
 	 * @param name
+	 * 			Name of the actor
 	 * @param printer
+	 * 				Actor in charge of printing message
 	 * @return Props
 	 */
 	static public Props props(String name, ActorRef printer) {
@@ -120,13 +125,16 @@ public class Cooker extends AbstractActor {
 		public ArrayList<String> commands;
 
 		/**
-		 * WhoToTell constructor
-		 * 
 		 * @param who
-		 * @param ready2
-		 * @param free_cookers2
-		 * @param cookers
+		 * 		Message to send
 		 * @param free_cookers
+		 * 		List of cookers available
+		 * @param ready
+		 * 		Boolean to specify if the command is ready
+		 * @param chef
+		 * 		Actor (chief cooker)
+		 * @param commands
+		 * 		List of commands waiting for cooker to be available
 		 */
 		public ToTell(String who, ArrayList<ActorRef> free_cookers, Boolean ready, ActorRef chef,
 				ArrayList<String> commands) {
@@ -149,10 +157,15 @@ public class Cooker extends AbstractActor {
 		 * WhoToTell constructor
 		 * 
 		 * @param who
-		 * @param ready2
-		 * @param free_cookers2
-		 * @param cookers
+		 * 		Message to send
 		 * @param free_cookers
+		 * 		List of cookers available
+		 * @param ready
+		 * 		Boolean to specify if the command is ready
+		 * @param chef
+		 * 		Actor (chief cooker)
+		 * @param commands
+		 * 		List of commands waiting for cooker to be available
 		 */
 		public WhoToTell(String who, ArrayList<ActorRef> free_cookers, Boolean ready, ActorRef chef,
 				ArrayList<String> commands) {
